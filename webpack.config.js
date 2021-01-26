@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.ts',
@@ -18,17 +19,35 @@ module.exports = {
     contentBase: './dist',
     port: 9000
   },
+  output: {
+    libraryTarget: "var"
+  },
+  externals: [
+      {
+          "window": "window"
+      }
+  ],
   plugins: [
-    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new HtmlWebpackPlugin({
       title: 'Development',
-     }),
+      template: './index.html',
+    }),
+    new webpack.ProvidePlugin({
+      Urbit: "@urbit/http-api",
+  })
   ],
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js'],
+    fallback: {
+      http: false
+    }
   },
   output: {
     path: `${__dirname}/dist`,
     filename: 'bundle.js',
+  },
+  optimization: {
+    minimize: false,
+    usedExports: true
   },
 };

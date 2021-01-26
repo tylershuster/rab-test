@@ -13,7 +13,7 @@
   "author": "Tyler Brown Cifu Shuster",
   "license": "ISC",
   "dependencies": {
-    "@urbit/http-api": "^1.0.0"
+    "@urbit/http-api": "file:/Users/tyler/Code/src/urbit"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
